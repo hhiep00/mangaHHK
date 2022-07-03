@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">  
+</head>
+<body>
+    <div th:fragment="nav"></div>
+    <nav class="navbar navbar-expand-sm navbar-light bg-light ">
+        <a class="navbar-brand" href="#">Home</a>
+        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+            data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">User quản lí <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">User khách hàng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/admin/categories}" href="/admin/categories">List Truyện</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Thêm truyện</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Thêm chương</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Thông tin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Đăng xuất</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</body>
+
+</html>

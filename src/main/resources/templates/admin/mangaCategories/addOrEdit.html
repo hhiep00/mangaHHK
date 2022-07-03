@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.thymeleaf.org"
+  xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+</head>
+
+<body>
+	<section class="row" layout:fragment="content">
+		<div class="col-6 offset-3 mt-4 ">
+			<form th:action="@{/admin/mangaCategories/saveOrUpdate}" action="" method="post" th:object="${mangaCategory}">
+				<div class="card">
+					<div class="card-header">
+						<h2>Thêm thể loại cho truyện</h2>
+					</div>
+					<div class="card-body">
+						<div class="form-group">
+                            <label for="manga">Truyện</label>
+                            <select class="form-control" name="mangaId" id="mangaId"
+                                th:field="*{mangaId}">
+                            <option th:each="itemManga : ${mangas}" th:value="${itemManga.mangaId}"
+                                th:text="${itemManga.name}" th:selected="${itemManga.mangaId == mangaCategory.mangaId}">
+                                Category Name</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoryId">Thể loại</label>
+                            <select class="form-control" name="categoryId" id="categoryId"
+                                th:field="*{categoryId}">
+                            <option th:each="itemCategory : ${categories}" th:value="${itemCategory.categoryId}"
+                                th:text="${itemCategory.name}" th:selected="${itemCategory.categoryId == mangaCategory.categoryId}">
+                                Category Name</option>
+                            </select>
+                        </div>
+
+					</div>
+					<div class="card-footer text-muted">
+						<button class="btn btn-primary"><i class="fas fa-save"></i>Save
+						</button>
+						<a  type="reset" class="btn btn-secondary">Cancel</a>
+					</div>
+				</div>
+			</form>
+		</div> 
+	</section>
+		
+</body>
+</html>

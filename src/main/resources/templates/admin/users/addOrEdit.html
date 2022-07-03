@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+</head>
+
+<body>
+	<section class="row" layout:fragment="content">
+		<div class="col mt-4 ">
+			<form action="/admin/users/saveOrUpdate" method="post" th:object="${user}">
+				<div class="card">
+					<div class="card-header">
+						<h2 >Sua User</h2>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-7">
+								<div class="form-group" >
+									<label for="userId">ID User</label>
+									<input type="text" class="form-control" name="userId" id="userId"
+										th:field="*{userId}" aria-describedby="userIdHid" placeholder="ID user">
+									<small id="mangaIdHid" class="form-text text-muted"></small>
+								</div>
+								<div class="form-group">
+									<label for="username">Username</label>
+									<input type="text" class="form-control" name="username" id="name" th:field="*{username}"
+										aria-describedby="usernameId" placeholder="Username">
+									<small id="usernameId" class="form-text text-muted"></small>
+								</div>
+								<div class="form-group">
+									<label for="password">Tác giả</label>
+									<input type="text" class="form-control" name="password" id="password"
+										th:field="*{password}" aria-describedby="passwordHid" placeholder="Tác giả">
+									<small id="passwordHid" class="form-text text-muted"></small>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="sex">Sex</label>
+								<select class="form-control" name="sex" id="sex" th:field="*{sex}">
+									<option value="1">Nam</option>
+									<option value="0">Nu</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="isAdmin">Admin ?</label>
+								<select class="form-control" name="isAdmin" id="isAdmin" th:field="*{isAdmin}">
+									<option value="1">Admin</option>
+									<option value="0">User</option>
+								</select>
+							</div>
+							
+						</div>
+
+						
+
+					</div>
+					<div class="card-footer text-muted">
+						<a th:href="@{/admin/users/add}" class="btn btn-success">Reset</a>
+						<button class="btn btn-primary"
+							>Upsate</button>
+						<a  th:href="@{'/admin/users/delete'+${user.username}}" class="btn btn-danger float-right">Delete</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+
+</body>
+
+</html>

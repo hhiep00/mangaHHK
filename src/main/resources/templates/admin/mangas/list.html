@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+</head>
+
+<section class="row" layout:fragment="content">
+    <div class="col mt-4 ">
+        <div class="card">
+            <div class="card-header">
+                <h2>Danh sách truyện</h2>
+            </div>
+            <div class="card-body">
+                <div th:if="${message!=null}" class="alert alert-primary" role="alert">
+                    <i>[[${message}]]</i>
+                </div>
+                <table class="table table-striped table-inverse ">
+                    <thead class="thead-inverse">
+                        <tr>
+                            <th></th>
+                            <th>ID truyện</th>
+                            <th>Tên truyện</th>
+                            <th>Số chương</th>
+                            <th>Tác giả</th>
+                            <th>Trạng thái</th>
+                            <th>Mô tả</th>
+                            <th>Thể loại</th>
+                            <th>Sửa</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item, iStat : ${mangas}" >
+                                <td></td>
+                                <td></td>
+                                <td> <img id="image" th:src="${item.image!=null ? '/admin/mangas/images/' + item.image : '/images/noimg.png'}" width="70" alt=""> </td>
+                                
+                                <td th:text="${item.name}"></td>
+                                <td th:text="${item.numberOfChapters}"></td>
+                                <td th:text="${item.authur}"></td>
+                                <td th:text="${item.status}"></td>
+                                <td th:text="${item.description}"></td>
+                                <td>
+                                    <a th:href="@{'/admin/mangas/edit/'+ ${item.mangaId}}" class="btn btn-outline-warning"><i class="fas fa-edit"></i></a>
+                                    <a th:href="@{'/admin/mangas/delete/'+ ${item.mangaId}}" class="btn btn-outline-danger"><i class="fas fa-recycle"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            <div class="card-footer text-muted mt-20" style="margin-top: 20px;">
+                <form action="" method="get">
+                    <div class="form-inline float-left">
+                        <label for="">Page Size: </label>
+                        <select class="form-control" name="" id="">
+                            <option>5</option>
+                            <option>10</option>
+                            <option>20</option>
+                            <option>30</option>
+                        </select>
+                    </div>
+                </form>
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+</section>
+<div class="mbt-20"></div>
+<div class="mbt-20"></div>
+<div class="popup"></div>
+<a id="back-to-top" style="display: none;">
+    <i class="fa fa-angle-up"></i>
+</a>
+
+</body>
+
+</html>

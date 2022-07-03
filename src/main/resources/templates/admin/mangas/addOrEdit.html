@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+</head>
+
+<body>
+	<section class="row" layout:fragment="content">
+		<div class="col mt-4 ">
+			<form th:action="@{/admin/mangas/saveOrUpdate}" method="post" enctype="multipart/form-data" th:object="${manga}">
+				<div class="card">
+					<div class="card-header">
+						<h2 th:text="${manga.isEdit ? 'Sửa truyện' : 'Thêm truyện'}"></h2>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-7">
+								<input type="hidden" th:field="*{isEdit}">
+								<div class="form-group" th:if="${manga.isEdit}">
+									<label for="mangaId">ID truyện</label>
+									<input type="text" class="form-control" name="mangaId" id="mangaId"
+										th:field="*{mangaId}" aria-describedby="mangaIdHid" placeholder="ID truyện">
+									<small id="mangaIdHid" class="form-text text-muted"></small>
+								</div>
+								<div class="form-group">
+									<label for="name">Tên truyện</label>
+									<input type="text" class="form-control" name="name" id="name" th:field="*{name}"
+										aria-describedby="nameId" placeholder="Tên truyện">
+									<small id="nameId" class="form-text text-muted"></small>
+								</div>
+								<div class="form-group">
+									<label for="authur">Tác giả</label>
+									<input type="text" class="form-control" name="authur" id="authur"
+										th:field="*{authur}" aria-describedby="authurHid" placeholder="Tác giả">
+									<small id="authurHid" class="form-text text-muted"></small>
+								</div>
+							</div>
+							<div class="col-3">
+								<script>
+									function chooseFile(fileInput){
+										if(fileInput.files && fileInput.files[0]){
+											var reader =new FileReader();
+
+											reader.onload=function(e){
+												$('#image').attr('src', e.target.result);
+											}
+
+											reader.readAsDataURL(fileInput.files[0]);
+										}
+									}
+								</script>
+								<img id="image" 
+									th:src="${manga.image!=null ? '/admin/mangas/images/' + manga.image : '/images/noimg.png'}"
+									src="/images/noimg.png" width="50%" class="img-fluid" alt="">
+								<div class="form-group">
+									<label for="mangaImage">Image File</label>
+									<input type="file" onchange="chooseFile(this)" class="form-control-file" name="imageFile" id="mangaImage"
+										placeholder="Image File" aria-describedby="mangaImage">
+									<small id="mangaImage" class="form-text text-muted">Manga Image</small>
+								</div>
+								<div class="form-group">
+									<label for="status">Trạng thái</label>
+									<select class="form-control" name="status" id="status" th:field="*{status}">
+										<option value="Đang ra">Đang ra</option>
+										<option value="Đã hoàn thành">Đã hoàn thành</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col">
+								<div class="form-group">
+									<label for="description">Mô tả</label>
+									<textarea class="form-control" name="description" th:field="*{description}"
+										id="description" rows="5"></textarea>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<div class="card-footer text-muted">
+						<a th:href="@{/admin/mangas/add}" class="btn btn-success">Reset</a>
+						<button class="btn btn-primary"
+							th:text="${manga.isEdit ? 'Update' : 'Save'}"></button>
+						<a th:if="${manga.isEdit}" th:href="@{'/admin/mangas/delete'+${manga.mangaId}}" class="btn btn-danger float-right">Delete</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+
+</body>
+
+</html>

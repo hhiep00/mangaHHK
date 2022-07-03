@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.thymeleaf.org" xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{admin/dashboardLayout.html}">
+
+<head>
+</head>
+
+<body>
+	<section class="row" layout:fragment="content">
+		<div class="col mt-4 ">
+			<form th:action="@{/admin/mangas/addNewChapter}" method="post" enctype="multipart/form-data" >
+				<div class="card">
+					<div class="card-header">
+						<h2 th:text="${manga.isEdit ? 'Sửa truyện' : 'Thêm truyện'}"></h2>
+					</div>
+					<div class="card-body">
+						<div class="row">
+							<div class="col-7">
+								<div class="form-group">
+									<label for="mangaId">Tên truyện</label>
+									<input  class="form-control" name="mangaId" id="mangaId" th:text="${manga.mangaId}"
+										aria-describedby="mangad" placeholder="Tên truyện">
+									<small id="mangaId" class="form-text text-muted"></small>
+								</div>
+								<div class="form-group">
+									<label for="name">Tên truyện</label>
+									<input  class="form-control" name="name" id="name" th:text="${manga.name}"
+										aria-describedby="nameId" placeholder="Tên truyện">
+									<small id="nameId" class="form-text text-muted"></small>
+								</div>
+								<div class="form-group">
+									<label for="authur">Tác giả</label>
+									<input  class="form-control" name="authur" id="authur"
+										th:text="${manga.authur}" aria-describedby="authurHid" placeholder="Tác giả">
+									<small id="authurHid" class="form-text text-muted"></small>
+								</div>
+                                <div class="form-group">
+									<label for="authur">Chương số</label>
+									<input type="text" class="form-control" name="chapterNumber" id="chapterNumber"
+										 aria-describedby="authurHid" placeholder="chapter">
+									<small id="authurHid" class="form-text text-muted"></small>
+								</div>
+							</div>
+							<div class="col-3">
+								<script>
+									function chooseFile(fileInput){
+										if(fileInput.files && fileInput.files[0]){
+											var reader =new FileReader();
+
+											reader.onload=function(e){
+												$('#image').attr('src', e.target.result);
+											}
+
+											reader.readAsDataURL(fileInput.files[0]);
+										}
+									}
+								</script>
+								<img id="image" 
+									th:src="${'/images/noimg.png'}"
+									src="/images/noimg.png" width="50%" class="img-fluid" alt="">
+								<div class="form-group">
+									<label for="mangaImage">Image File</label>
+									<input type="file" multiple="multiple" onchange="chooseFile(this)" class="form-control-file" name="files" id="mangaImage"
+										placeholder="Image File" aria-describedby="mangaImage">
+									<small id="mangaImage" class="form-text text-muted">Manga Image</small>
+								</div>
+							</div>
+						</div>
+
+
+					</div>
+					<div class="card-footer text-muted">
+						<button class="btn btn-primary"
+							th:text="Save"></button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</section>
+
+</body>
+
+</html>
